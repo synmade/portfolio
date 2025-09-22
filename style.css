@@ -247,6 +247,26 @@ footer {
   text-shadow: 0 0 5px #FFD700; /* subtle glow */
 }
 
+/* Social media bar */
+.social-bar {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  background: #3B0270; /* same as footer */
+}
+
+.social-bar a img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.social-bar a img:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
 
 
 
