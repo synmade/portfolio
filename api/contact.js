@@ -23,13 +23,13 @@ export default async function handler(req, res) {
     });
 
     // Email options
-    const mailOptions = {
-      from: email,                    // sender is the user
-      to: process.env.EMAIL_USER,     // your Gmail receives it
-      subject: `New message from ${name}`,
-      text: message
-    };
-
+   const mailOptions = {
+  from: process.env.EMAIL_USER, // must be your Gmail
+  replyTo: email,               // allows you to reply to the sender
+  to: process.env.EMAIL_USER,
+  subject: `New message from ${name}`,
+  text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+};
     // Send email
     await transporter.sendMail(mailOptions);
 
