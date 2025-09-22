@@ -22,18 +22,49 @@
   <main>
     <section class="page-content">
       <h2>Contact Us</h2>
-      <form class="contact-form">
-        <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Your name">
+     <form id="contactForm">
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" required>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Your email">
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email" required>
 
-        <label for="message">Message</label>
-        <textarea id="message" rows="5" placeholder="Your message"></textarea>
+  <label for="message">Message</label>
+  <textarea id="message" name="message" required></textarea>
 
-        <button type="submit">Send</button>
-      </form>
+  <button type="submit">Send</button>
+</form>
+      <p id="formResponse" style="margin-top:1rem;"></p>
+
+<script>
+  const form = document.getElementById("contactForm");
+  const responseEl = document.getElementById("formResponse");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      name: form.name.value,
+      email: form.email.value,
+      message: form.message.value
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await res.json();
+      responseEl.textContent = data.message;
+      if (res.ok) form.reset();
+    } catch (err) {
+      responseEl.textContent = "Something went wrong. Try again.";
+    }
+  });
+</script>
+      
     </section>
   </main>
 
@@ -44,3 +75,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
