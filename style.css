@@ -47,6 +47,16 @@ header {
   text-decoration: underline;
 }
 
+.nav-links li a {
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #FFD700;
+  border-bottom: 2px solid #FFD700;
+}
+
+
 .menu-btn {
   display: none;
   font-size: 1.5rem;
@@ -95,6 +105,21 @@ main {
   height: auto;
   border-radius: 10px;
 }
+
+.hero, .hero-image {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+  animation-delay: 0.3s; /* stagger appearance */
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 .image-caption {
   margin-top: 0.5rem;
@@ -208,3 +233,4 @@ footer {
     display: block;
   }
 }
+
