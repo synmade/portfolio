@@ -49,10 +49,19 @@
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    // Get reCAPTCHA token
+    const token = grecaptcha.getResponse();
+
+    if (!token) {
+      responseEl.textContent = "Please complete the reCAPTCHA.";
+      return;
+    }
+
     const formData = {
       name: form.name.value,
       email: form.email.value,
-      message: form.message.value
+      message: form.message.value,
+      recaptchaToken: token // <- include token here
     };
 
     try {
@@ -64,12 +73,16 @@
 
       const data = await res.json();
       responseEl.textContent = data.message;
-      if (res.ok) form.reset();
+      if (res.ok) {
+        form.reset();
+        grecaptcha.reset(); // reset the reCAPTCHA widget
+      }
     } catch (err) {
       responseEl.textContent = "Something went wrong. Try again.";
     }
   });
 </script>
+
       
     </section>
   </main>
@@ -81,6 +94,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
