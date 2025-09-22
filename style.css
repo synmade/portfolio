@@ -147,6 +147,7 @@ main {
 .page-content p {
   font-size: 1.1rem;
   max-width: 600px;
+  margin-bottom: 1.5rem; /* space between paragraphs */
 }
 
 /* Contact form */
@@ -239,13 +240,13 @@ footer {
   color: #FFD700; /* gold color for the link */
   text-decoration: underline;
   transition: color 0.3s, text-shadow 0.3s;
-  margin-bottom: 1.5rem; /* space between paragraphs */
 }
 
 .page-content p a:hover {
   color: #FFF1F1; /* changes to light color on hover */
   text-shadow: 0 0 5px #FFD700; /* subtle glow */
 }
+
 
 
 
