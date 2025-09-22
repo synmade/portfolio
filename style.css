@@ -234,3 +234,17 @@ footer {
   }
 }
 
+/* Page content links */
+.page-content p a {
+  color: #FFD700; /* gold color for the link */
+  text-decoration: underline;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.page-content p a:hover {
+  color: #FFF1F1; /* changes to light color on hover */
+  text-shadow: 0 0 5px #FFD700; /* subtle glow */
+}
+
+
+
