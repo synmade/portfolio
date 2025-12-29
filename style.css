@@ -1,8 +1,8 @@
 :root {
   --bg-main: #050505;
-  --bg-secondary: #0d0d0d;
-  --text-main: #e5e5e5;
-  --text-dim: #9f9f9f;
+  --bg-secondary: #050505;
+  --text-main: #d3c4ff;
+  --text-dim: #d3c4ff;
   --accent: #00ff88; /* terminal green */
   --accent-dim: #00cc6a;
 }
@@ -257,6 +257,7 @@ footer {
   transform: scale(1.2);
   filter: brightness(1.2);
 }
+
 
 
 
