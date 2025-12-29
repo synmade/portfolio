@@ -3,43 +3,162 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Home | Synmade </title>
-  <link rel="stylesheet" href="style.css">
+  <title>Synmade</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background: #000000;
+      color: #00ff00;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    }
+
+    header {
+      padding: 1.5rem 2rem;
+      border-bottom: 2px solid #00ff00;
+      background: #0a0a0a;
+    }
+
+    .logo {
+      color: #00ff00;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .logo::before {
+      content: '> ';
+      color: #00ff00;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .hero {
+      text-align: center;
+      color: #00ff00;
+      max-width: 700px;
+      border: 2px solid #00ff00;
+      padding: 3rem 2rem;
+      background: rgba(0, 20, 0, 0.5);
+    }
+
+    .hero h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .hero h2::before {
+      content: '[ ';
+    }
+
+    .hero h2::after {
+      content: ' ]';
+    }
+
+    .hero > p {
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      letter-spacing: 1px;
+    }
+
+    .hero-image {
+      border: 2px solid #00ff00;
+      padding: 2rem;
+      background: #000000;
+      margin-top: 2rem;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto 1.5rem;
+      filter: brightness(0.9) contrast(1.2);
+    }
+
+    .image-caption {
+      color: #00ff00;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+
+    .image-caption::before {
+      content: '// ';
+    }
+
+    footer {
+      padding: 1.5rem;
+      text-align: center;
+      color: #00ff00;
+      border-top: 2px solid #00ff00;
+      background: #0a0a0a;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    footer::before {
+      content: '$ ';
+    }
+
+    /* Blinking cursor effect */
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .hero h2::after {
+      animation: blink 1s infinite;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 2rem 1.5rem;
+      }
+
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+
+      .hero > p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
-    <nav class="navbar">
-      <h1 class="logo">Synmade</h1>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <button class="menu-btn" id="menuBtn">☰</button>
-    </nav>
+    <h1 class="logo">SYNMADE</h1>
   </header>
 
-  <!-- Hero section fills screen -->
   <main>
     <section class="hero">
-      <h2>Welcome to My Website</h2>
-      <p>This will be used as a portfolio.</p>
-
-      <!-- Image + caption -->
+      <h2>WELCOME TO MY WEBSITE</h2>
+      <p>THIS WILL BE USED AS A PORTFOLIO.</p>
       <div class="hero-image">
-        <img src="images/slogo.png" alt="Placeholder Image">
-        <p class="image-caption">This is my logo.</p>
+        <img src="images/slogo.png" alt="Synmade Logo">
+        <p class="image-caption">THIS IS MY LOGO.</p>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Synmade</p>
+    <p>&copy; 2025 SYNMADE</p>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
-
-
-
