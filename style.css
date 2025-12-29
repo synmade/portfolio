@@ -193,7 +193,7 @@ main {
 
 /* Footer */
 footer {
-  background: #3B0270;
+  background: #050505;
   color: #FFF1F1;
   text-align: center;
   padding: 1rem;
@@ -257,6 +257,7 @@ footer {
   transform: scale(1.2);
   filter: brightness(1.2);
 }
+
 
 
 
