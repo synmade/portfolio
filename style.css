@@ -1,4 +1,12 @@
-/* Reset & basics */
+:root {
+  --bg-main: #050505;
+  --bg-secondary: #0d0d0d;
+  --text-main: #e5e5e5;
+  --text-dim: #9f9f9f;
+  --accent: #00ff88; /* terminal green */
+  --accent-dim: #00cc6a;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,44 +24,27 @@ body {
 
 /* Navbar */
 header {
-  background: #3B0270;
-  color: #FFF1F1;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid #222;
 }
 
 .logo {
-  font-size: 1.5rem;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
+  color: var(--accent);
+  letter-spacing: 1px;
 }
 
 .nav-links li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.nav-links li a.active {
-  text-decoration: underline;
-}
-
-.nav-links li a {
-  transition: color 0.3s, border-bottom 0.3s;
+  color: var(--text-main);
+  font-weight: normal;
 }
 
 .nav-links li a:hover {
-  color: #FFD700;
-  border-bottom: 2px solid #FFD700;
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+
+.nav-links li a.active {
+  color: var(--accent);
 }
 
 
@@ -266,6 +257,7 @@ footer {
   transform: scale(1.2);
   filter: brightness(1.2);
 }
+
 
 
 
