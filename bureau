@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bureau of Absurd Logic</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Abril+Fatface&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=VT323&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════
+   THEME DEFINITIONS
+   ═══════════════════════════════════════════════════ */
+
+:root, [data-theme="bureau"] {
+  --bg:        #F5F0E8;
+  --bg2:       #EDE8DC;
+  --ink:       #1A1208;
+  --ink2:      #3a2e1e;
+  --red:       #C8321A;
+  --yellow:    #F2C94C;
+  --accent:    #2A7F72;
+  --accent2:   #1d5e54;
+  --orange:    #E07B39;
+  --secret:    #4A1070;
+  --paper:     #EDE8DC;
+  --stamp:     #8B2500;
+  --header-bg: #1A1208;
+  --header-bd: #C8321A;
+  --line-clr:  rgba(0,0,0,0.035);
+  --line-clr2: rgba(0,0,0,0.015);
+  --shadow:    #1A1208;
+  --font-display: 'Abril Fatface', serif;
+  --font-body:    'Courier Prime', monospace;
+  --font-ui:      'Space Mono', monospace;
+  --cursor-clr: %231A1208;
+}
+
+[data-theme="noir"] {
+  --bg:        #0f0f0f;
+  --bg2:       #1a1a1a;
+  --ink:       #e8e0d0;
+  --ink2:      #bbb;
+  --red:       #e03030;
+  --yellow:    #d4a017;
+  --accent:    #3a9e8f;
+  --accent2:   #2a7267;
+  --orange:    #c96a20;
+  --secret:    #6d1a9c;
+  --paper:     #1e1e1e;
+  --stamp:     #c04000;
+  --header-bg: #000;
+  --header-bd: #e03030;
+  --line-clr:  rgba(255,255,255,0.03);
+  --line-clr2: rgba(255,255,255,0.015);
+  --shadow:    #000;
+  --font-display: 'Abril Fatface', serif;
+  --font-body:    'Courier Prime', monospace;
+  --font-ui:      'Space Mono', monospace;
+  --cursor-clr: %23e8e0d0;
+}
+
+[data-theme="retro"] {
+  --bg:        #001100;
+  --bg2:       #001800;
+  --ink:       #00ff41;
+  --ink2:      #00cc33;
+  --red:       #ff3300;
+  --yellow:    #ffcc00;
+  --accent:    #00cc88;
+  --accent2:   #009966;
+  --orange:    #ff6600;
+  --secret:    #6600ff;
+  --paper:     #001500;
+  --stamp:     #ff3300;
+  --header-bg: #000800;
+  --header-bd: #00ff41;
+  --line-clr:  rgba(0,255,65,0.06);
+  --line-clr2: rgba(0,255,65,0.03);
+  --shadow:    #00ff41;
+  --font-display: 'VT323', monospace;
+  --font-body:    'VT323', monospace;
+  --font-ui:      'VT323', monospace;
+  --cursor-clr: %2300ff41;
+}
+
+[data-theme="elegant"] {
+  --bg:        #faf7f2;
+  --bg2:       #f2ede3;
+  --ink:       #2c1810;
+  --ink2:      #5c3820;
+  --red:       #8b1a1a;
+  --yellow:    #c8960c;
+  --accent:    #2e5c3a;
+  --accent2:   #1e3c28;
+  --orange:    #c4622d;
+  --secret:    #3d1060;
+  --paper:     #f5f0e8;
+  --stamp:     #6b1a00;
+  --header-bg: #2c1810;
+  --header-bd: #c8960c;
+  --line-clr:  rgba(0,0,0,0.025);
+  --line-clr2: rgba(0,0,0,0.01);
+  --shadow:    #2c1810;
+  --font-display: 'Playfair Display', serif;
+  --font-body:    'Courier Prime', monospace;
+  --font-ui:      'Space Mono', monospace;
+  --cursor-clr: %232c1810;
+}
+
+[data-theme="candy"] {
+  --bg:        #fff0f8;
+  --bg2:       #ffe4f4;
+  --ink:       #1a0020;
+  --ink2:      #3a0040;
+  --red:       #e0186a;
+  --yellow:    #f7c842;
+  --accent:    #00bfa5;
+  --accent2:   #008877;
+  --orange:    #ff7043;
+  --secret:    #6200ea;
+  --paper:     #ffe8f6;
+  --stamp:     #c2185b;
+  --header-bg: #1a0020;
+  --header-bd: #e0186a;
+  --line-clr:  rgba(220,0,120,0.04);
+  --line-clr2: rgba(220,0,120,0.02);
+  --shadow:    #1a0020;
+  --font-display: 'Abril Fatface', serif;
+  --font-body:    'Courier Prime', monospace;
+  --font-ui:      'Space Mono', monospace;
+  --cursor-clr: %231a0020;
+}
+
+/* ═══════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 27px, var(--line-clr) 28px),
+    repeating-linear-gradient(90deg, transparent, transparent 27px, var(--line-clr2) 28px);
+  transition: background 0.4s, color 0.4s;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 999; opacity: 0.25;
+}
+
+/* ─── PAGE MANAGEMENT ─── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ═══════════════════════════════════════════════════
+   MAIN MENU
+   ═══════════════════════════════════════════════════ */
+
+#page-menu {
+  min-height: 100vh;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+}
+#page-menu.active { display: flex; }
+
+/* Floating background stamps */
+.menu-stamp {
+  position: fixed;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 9rem);
+  color: var(--ink);
+  opacity: 0.03;
+  pointer-events: none;
+  user-select: none;
+  animation: stampDrift linear infinite;
+}
+@keyframes stampDrift {
+  0%   { transform: rotate(var(--rot)) translateY(0px); }
+  50%  { transform: rotate(var(--rot)) translateY(-20px); }
+  100% { transform: rotate(var(--rot)) translateY(0px); }
+}
+
+/* Classified tape strip at top */
+.menu-tape {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--red) 0px, var(--red) 18px,
+    var(--yellow) 18px, var(--yellow) 36px
+  );
+  z-index: 10;
+}
+
+/* Logo lockup */
+.menu-logo-wrap {
+  text-align: center;
+  margin-bottom: 48px;
+  animation: menuReveal 0.7s cubic-bezier(0.34,1.4,0.64,1) both;
+}
+@keyframes menuReveal {
+  from { opacity: 0; transform: translateY(-30px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.menu-seal {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  display: block;
+  animation: sealSpin 12s linear infinite;
+}
+@keyframes sealSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.menu-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.menu-title .title-line2 {
+  color: var(--red);
+  display: block;
+}
+.menu-subtitle {
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  background: var(--ink);
+  padding: 4px 16px;
+  display: inline-block;
+  margin-top: 12px;
+}
+
+/* Menu card */
+.menu-card {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  width: 100%;
+  max-width: 460px;
+  padding: 32px;
+  animation: menuReveal 0.7s 0.15s cubic-bezier(0.34,1.4,0.64,1) both;
+  position: relative;
+}
+
+.menu-card::before {
+  content: 'FORM B-7 — APPLICANT INTAKE';
+  position: absolute;
+  top: -11px; left: 20px;
+  background: var(--red);
+  color: white;
+  font-family: var(--font-ui);
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  padding: 2px 10px;
+  text-transform: uppercase;
+}
+
+/* Agent name input */
+.form-row {
+  margin-bottom: 20px;
+}
+.form-row label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  margin-bottom: 6px;
+}
+.agent-input {
+  width: 100%;
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  padding: 10px 14px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--ink);
+  outline: none;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.agent-input::placeholder { opacity: 0.3; }
+.agent-input:focus {
+  box-shadow: 4px 4px 0 var(--accent);
+  border-color: var(--accent);
+}
+
+/* Difficulty selector */
+.diff-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+.diff-btn {
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  padding: 10px 8px;
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  text-align: center;
+  color: var(--ink);
+  transition: all 0.13s;
+}
+.diff-btn:hover { background: var(--yellow); transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); }
+.diff-btn.selected { background: var(--ink); color: var(--bg); box-shadow: 3px 3px 0 var(--accent); }
+.diff-btn .diff-icon { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+.diff-btn .diff-time { font-size: 0.5rem; opacity: 0.6; margin-top: 2px; display: block; }
+
+/* Menu divider */
+.menu-divider {
+  border: none;
+  border-top: 1px dashed var(--ink2);
+  opacity: 0.3;
+  margin: 20px 0;
+}
+
+/* Settings mini-link */
+.settings-link {
+  background: none;
+  border: none;
+  font-family: var(--font-ui);
+  font-size: 0.58rem;
+  color: var(--ink2);
+  cursor: pointer;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  padding: 0;
+  transition: color 0.13s;
+}
+.settings-link:hover { color: var(--ink); }
+
+/* Start button */
+.start-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--red);
+  color: white;
+  border: 2px solid var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 var(--ink);
+  transition: all 0.15s;
+  margin-top: 8px;
+}
+.start-btn:hover {
+  background: var(--ink);
+  transform: translate(-2px,-2px);
+  box-shadow: 7px 7px 0 var(--red);
+}
+
+/* How to play snippet */
+.how-to-strip {
+  max-width: 460px;
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  animation: menuReveal 0.7s 0.3s cubic-bezier(0.34,1.4,0.64,1) both;
+}
+.how-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 5px 10px;
+  font-family: var(--font-ui);
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.how-chip span { font-size: 1rem; }
+
+/* ═══════════════════════════════════════════════════
+   SETTINGS OVERLAY
+   ═══════════════════════════════════════════════════ */
+
+#settings-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 800;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease;
+}
+#settings-overlay.open { display: flex; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.settings-panel {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--ink);
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: panelIn 0.35s cubic-bezier(0.34,1.4,0.64,1);
+}
+@keyframes panelIn { from { transform: translateY(30px) scale(0.95); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: var(--ink);
+  color: var(--bg);
+  border-bottom: 3px solid var(--yellow);
+  position: sticky; top: 0; z-index: 10;
+}
+.settings-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--bg);
+}
+.settings-header .sh-sub {
+  font-family: var(--font-ui);
+  font-size: 0.48rem;
+  color: var(--yellow);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+}
+.close-btn {
+  background: none;
+  border: 2px solid var(--bg);
+  color: var(--bg);
+  width: 32px; height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.13s;
+  flex-shrink: 0;
+}
+.close-btn:hover { background: var(--red); border-color: var(--red); }
+
+.settings-body { padding: 24px; }
+
+.settings-section { margin-bottom: 28px; }
+.settings-section-title {
+  font-family: var(--font-ui);
+  font-size: 0.52rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--red);
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  opacity: 0.8;
+}
+
+/* Theme grid */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.theme-swatch {
+  cursor: pointer;
+  border: 2px solid transparent;
+  padding: 3px;
+  transition: all 0.15s;
+  position: relative;
+}
+.theme-swatch.active { border-color: var(--accent); }
+.theme-swatch:hover { transform: translateY(-2px); }
+.swatch-preview {
+  height: 52px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.swatch-name {
+  font-family: var(--font-ui);
+  font-size: 0.48rem;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.theme-swatch.active .swatch-name { color: var(--accent); font-weight: 700; }
+.check-mark {
+  position: absolute;
+  top: 3px; right: 3px;
+  font-size: 0.7rem;
+  display: none;
+}
+.theme-swatch.active .check-mark { display: block; }
+
+/* Toggle switch */
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.1);
+}
+.toggle-row:last-child { border-bottom: none; }
+.toggle-info .tl { font-family: var(--font-body); font-size: 0.82rem; color: var(--ink); }
+.toggle-info .ts { font-family: var(--font-ui); font-size: 0.5rem; color: var(--ink2); display: block; margin-top: 2px; letter-spacing: 0.1em; opacity: 0.7; }
+
+.toggle-switch {
+  position: relative;
+  width: 44px; height: 24px;
+  flex-shrink: 0;
+}
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-track {
+  position: absolute; inset: 0;
+  background: #ccc;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  background: var(--ink);
+  transition: transform 0.2s;
+}
+.toggle-switch input:checked + .toggle-track { background: var(--accent); }
+.toggle-switch input:checked + .toggle-track::after { transform: translateX(20px); }
+
+/* Slider */
+.slider-row { padding: 8px 0; }
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-ui);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.slider-label span { color: var(--accent); font-weight: 700; }
+input[type=range] {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 8px;
+  background: var(--bg2);
+  border: 2px solid var(--ink);
+  outline: none;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px; height: 20px;
+  background: var(--ink);
+  border: 2px solid var(--accent);
+  cursor: pointer;
+}
+
+/* Save btn */
+.settings-save-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--accent);
+  color: white;
+  border: 2px solid var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: all 0.15s;
+  margin-top: 8px;
+}
+.settings-save-btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); background: var(--accent2); }
+
+/* ═══════════════════════════════════════════════════
+   GAME HEADER
+   ═══════════════════════════════════════════════════ */
+
+header {
+  background: var(--header-bg);
+  color: var(--bg);
+  padding: 10px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 4px solid var(--header-bd);
+  position: sticky; top: 0; z-index: 200;
+  transition: background 0.4s, border-color 0.4s;
+}
+
+.header-logo {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  color: var(--bg);
+}
+.header-logo span {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.48rem;
+  letter-spacing: 0.28em;
+  color: var(--yellow);
+  text-transform: uppercase;
+}
+
+.hud { display: flex; gap: 16px; align-items: center; }
+.hud-item { text-align: center; min-width: 48px; }
+.hud-item label {
+  display: block;
+  color: var(--yellow);
+  letter-spacing: 0.2em;
+  font-size: 0.46rem;
+  text-transform: uppercase;
+  font-family: var(--font-ui);
+}
+.hud-item .val {
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  color: var(--bg);
+}
+
+.header-menu-btn {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--bg);
+  padding: 4px 10px;
+  font-family: var(--font-ui);
+  font-size: 0.52rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.13s;
+}
+.header-menu-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
+
+/* combo badge */
+.combo-badge {
+  background: var(--yellow);
+  color: var(--ink);
+  padding: 3px 10px;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  border: 2px solid var(--ink);
+  display: none;
+  animation: comboPop 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  white-space: nowrap;
+}
+.combo-badge.show { display: block; }
+.combo-badge.hot { background: var(--red); color: white; }
+.combo-badge.fire { background: var(--orange); color: white; animation: comboPop 0.35s cubic-bezier(0.34,1.56,0.64,1), comboPulse 0.6s ease-in-out infinite alternate; }
+@keyframes comboPop { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes comboPulse { from { transform: scale(1); } to { transform: scale(1.08); } }
+
+/* rank banner */
+#rank-banner {
+  background: var(--header-bg);
+  border-bottom: 3px solid var(--yellow);
+  padding: 6px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.68rem;
+  font-family: var(--font-ui);
+  position: sticky; top: 58px; z-index: 190;
+  transition: background 0.4s;
+}
+.rank-label { color: var(--yellow); letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.5rem; }
+.rank-name { color: var(--bg); font-weight: 700; letter-spacing: 0.05em; }
+.rank-badge-icon { font-size: 1.2rem; }
+.xp-bar-wrap { flex: 1; height: 8px; background: #333; border: 1px solid #555; overflow: hidden; }
+.xp-bar-fill { height: 100%; background: repeating-linear-gradient(45deg, var(--yellow), var(--yellow) 5px, #c9a600 5px, #c9a600 10px); transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+.xp-text { color: #aaa; font-size: 0.55rem; white-space: nowrap; }
+
+/* ═══════════════════════════════════════════════════
+   GAME STAGE
+   ═══════════════════════════════════════════════════ */
+
+#stage { max-width: 800px; margin: 0 auto; padding: 28px 20px 100px; }
+
+.progress-bar-wrap { background: #ddd; border: 2px solid var(--ink); height: 10px; margin-bottom: 20px; overflow: hidden; }
+.progress-bar-fill { height: 100%; transition: width 0.5s ease; background: repeating-linear-gradient(45deg, var(--accent), var(--accent) 6px, var(--accent2) 6px, var(--accent2) 12px); }
+
+/* Timer */
+.timer-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.timer-track { flex: 1; height: 14px; background: var(--bg2); border: 2px solid var(--ink); overflow: hidden; }
+.timer-fill { height: 100%; background: var(--accent); transition: width 0.1s linear, background 0.3s; }
+.timer-fill.warning { background: var(--orange); }
+.timer-fill.danger { background: var(--red); animation: timerPulse 0.3s ease-in-out infinite alternate; }
+@keyframes timerPulse { from { opacity: 1; } to { opacity: 0.55; } }
+.timer-num { font-family: var(--font-ui); font-size: 1.1rem; font-weight: 700; min-width: 32px; text-align: right; }
+.timer-num.danger { color: var(--red); }
+
+/* Puzzle card */
+.puzzle-card {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  padding: 28px;
+  position: relative;
+  box-shadow: 6px 6px 0 var(--shadow);
+  animation: slideIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+  transition: background 0.4s, border-color 0.4s;
+}
+.puzzle-card.secret-mode {
+  background: #1a0a2e;
+  border-color: #8B5CF6;
+  box-shadow: 6px 6px 0 #8B5CF6, 0 0 30px rgba(139,92,246,0.2);
+  color: #e8d5ff;
+}
+.puzzle-card.secret-mode .puzzle-flavor { color: #9d7fd0; border-color: #8B5CF6; }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(16px) rotate(-0.8deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+.card-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.case-tag { background: var(--red); color: white; font-size: 0.55rem; letter-spacing: 0.25em; padding: 2px 10px; font-weight: 700; text-transform: uppercase; font-family: var(--font-ui); }
+.case-tag.secret { background: var(--secret); }
+.points-tag { font-family: var(--font-ui); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.1em; font-weight: 700; }
+
+.puzzle-question { font-family: var(--font-display); font-size: 1.4rem; line-height: 1.3; margin-bottom: 10px; }
+.puzzle-flavor { font-size: 0.7rem; color: var(--ink2); font-style: italic; margin-bottom: 24px; border-left: 3px solid var(--yellow); padding-left: 10px; line-height: 1.5; }
+
+.stamp-bg { position: absolute; bottom: 18px; right: 18px; font-family: var(--font-display); font-size: 2rem; color: var(--stamp); opacity: 0.12; transform: rotate(-8deg); pointer-events: none; }
+.secret-mode .stamp-bg { color: #8B5CF6; opacity: 0.2; }
+
+/* Options */
+.options { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 18px; }
+.option-btn { background: var(--bg); border: 2px solid var(--ink); padding: 12px 14px; font-family: var(--font-body); font-size: 0.76rem; cursor: pointer; text-align: left; transition: all 0.13s; line-height: 1.4; color: var(--ink); }
+.option-btn:hover:not(:disabled) { background: var(--yellow); transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--ink); }
+.secret-mode .option-btn { background: #2a1045; color: #e8d5ff; border-color: #8B5CF6; }
+.secret-mode .option-btn:hover:not(:disabled) { background: #4A1070; }
+.option-btn.correct { background: var(--accent) !important; color: white !important; border-color: var(--accent) !important; box-shadow: 4px 4px 0 var(--ink); }
+.option-btn.wrong { background: var(--red) !important; color: white !important; border-color: var(--red) !important; text-decoration: line-through; }
+.option-btn.eliminated { opacity: 0.3; pointer-events: none; text-decoration: line-through; }
+.option-btn:disabled { cursor: not-allowed; }
+.option-letter { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: var(--ink); color: var(--bg); font-size: 0.6rem; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+.option-btn.correct .option-letter { background: white; color: var(--accent); }
+.option-btn.wrong .option-letter { background: white; color: var(--red); }
+.secret-mode .option-letter { background: #8B5CF6; }
+
+/* Hint box */
+.hint-box { display: none; background: var(--bg2); border: 2px dashed var(--yellow); padding: 10px 14px; font-size: 0.73rem; font-style: italic; color: var(--ink2); margin-bottom: 12px; line-height: 1.5; animation: popIn 0.3s ease; }
+.hint-box.show { display: block; }
+
+/* Lifelines */
+.lifelines-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.lifeline-btn { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border: 2px solid var(--ink); background: var(--bg); font-family: var(--font-ui); font-size: 0.6rem; cursor: pointer; transition: all 0.13s; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink); }
+.lifeline-btn:hover:not(:disabled) { background: var(--ink); color: var(--bg); transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--orange); }
+.lifeline-btn:disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+.lifeline-btn .ll-icon { font-size: 1rem; }
+.lifeline-btn .ll-count { background: var(--red); color: white; border-radius: 50%; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.55rem; }
+.lifeline-btn .ll-count.zero { background: #aaa; }
+
+/* Feedback */
+.feedback { display: none; margin-top: 14px; padding: 12px 14px; border: 2px solid var(--ink); font-size: 0.75rem; line-height: 1.6; background: var(--bg); animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+.feedback.show { display: block; }
+.feedback.correct-fb { border-color: var(--accent); background: var(--bg2); }
+.feedback.wrong-fb { border-color: var(--red); background: var(--bg2); }
+.feedback.timeout-fb { border-color: var(--orange); background: var(--bg2); }
+.feedback-emoji { font-size: 1.2rem; margin-bottom: 4px; display: block; }
+@keyframes popIn { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+
+/* Next btn */
+.next-btn { display: none; margin-top: 14px; width: 100%; padding: 13px; background: var(--ink); color: var(--bg); border: 2px solid var(--ink); font-family: var(--font-display); font-size: 1rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.15s; }
+.next-btn:hover { background: var(--red); border-color: var(--red); transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--ink); }
+.next-btn.show { display: block; }
+.next-btn.secret { background: var(--secret); border-color: #8B5CF6; }
+.next-btn.secret:hover { background: #6d28d9; }
+
+/* Score popup */
+.score-popup { position: fixed; pointer-events: none; font-family: var(--font-display); font-size: 2rem; z-index: 998; animation: scoreFloat 1.2s ease-out forwards; }
+@keyframes scoreFloat { 0% { opacity:1; transform:translateY(0) scale(0.7); } 30% { transform:translateY(-20px) scale(1.2); } 100% { opacity:0; transform:translateY(-80px) scale(0.9); } }
+.burst { position: fixed; pointer-events: none; font-size: 1.8rem; animation: burstAnim 0.9s ease-out forwards; z-index: 997; }
+@keyframes burstAnim { 0% { opacity:1; transform:scale(0.5) translateY(0); } 100% { opacity:0; transform:scale(2.2) translateY(-90px); } }
+
+/* ─── END SCREEN ─── */
+#end-screen { display: none; text-align: center; padding: 40px 28px; background: var(--paper); border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--shadow); animation: slideIn 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+#end-screen.show { display: block; }
+.end-title { font-family: var(--font-display); font-size: 2.8rem; line-height: 1; margin-bottom: 6px; }
+.end-subtitle { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; font-family: var(--font-ui); }
+.end-score-big { font-size: 3.5rem; font-weight: 700; color: var(--accent); font-family: var(--font-ui); margin: 8px 0; }
+.end-rank-display { display: inline-flex; align-items: center; gap: 12px; background: var(--ink); color: var(--bg); padding: 10px 20px; margin: 12px auto; border: 2px solid var(--yellow); }
+.end-rank-display .erb { font-size: 2rem; }
+.end-rank-display .ern { font-family: var(--font-display); font-size: 1.2rem; }
+.end-rank-display .erl { font-size: 0.5rem; color: var(--yellow); letter-spacing: 0.2em; text-transform: uppercase; display: block; font-family: var(--font-ui); }
+.end-stats { display: flex; justify-content: center; gap: 24px; margin: 16px 0; font-family: var(--font-ui); font-size: 0.7rem; }
+.end-stat-item { text-align: center; }
+.end-stat-item .esv { font-size: 1.4rem; font-weight: 700; color: var(--accent); display: block; }
+.end-stat-item .esl { color: var(--ink2); font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; }
+.end-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 16px 0 24px; }
+.badge-pill { background: var(--ink); color: var(--bg); padding: 4px 14px; font-family: var(--font-ui); font-size: 0.6rem; letter-spacing: 0.1em; border: 1px solid #555; display: flex; align-items: center; gap: 5px; }
+.badge-pill.secret-badge { background: var(--secret); border-color: #8B5CF6; }
+.end-verdict { font-size: 0.78rem; max-width: 420px; margin: 0 auto 24px; line-height: 1.7; font-style: italic; color: var(--ink2); }
+.end-btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.restart-btn { padding: 12px 28px; background: var(--red); color: white; border: 2px solid var(--ink); font-family: var(--font-display); font-size: 1.05rem; cursor: pointer; transition: all 0.15s; box-shadow: 4px 4px 0 var(--ink); }
+.restart-btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+.menu-btn-end { padding: 12px 28px; background: var(--bg2); color: var(--ink); border: 2px solid var(--ink); font-family: var(--font-display); font-size: 1.05rem; cursor: pointer; transition: all 0.15s; box-shadow: 4px 4px 0 var(--ink); }
+.menu-btn-end:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+
+/* ─── SECRET UI ─── */
+#secret-unlock { display: none; text-align: center; padding: 40px 28px; background: #0d0020; border: 3px solid #8B5CF6; box-shadow: 8px 8px 0 #8B5CF6, 0 0 40px rgba(139,92,246,0.3); animation: slideIn 0.5s cubic-bezier(0.34,1.56,0.64,1); color: #e8d5ff; }
+#secret-unlock.show { display: block; }
+.secret-unlock-title { font-family: var(--font-display); font-size: 2.2rem; color: #c4b5fd; margin-bottom: 8px; }
+.secret-unlock-sub { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #8B5CF6; margin-bottom: 20px; font-family: var(--font-ui); }
+.secret-unlock-desc { font-size: 0.78rem; line-height: 1.7; color: #9d7fd0; max-width: 380px; margin: 0 auto 24px; font-style: italic; }
+.secret-enter-btn { padding: 12px 28px; background: var(--secret); color: white; border: 2px solid #8B5CF6; font-family: var(--font-display); font-size: 1.05rem; cursor: pointer; transition: all 0.15s; box-shadow: 4px 4px 0 #8B5CF6; }
+.secret-enter-btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #8B5CF6; }
+
+/* ─── TOASTS ─── */
+.unlock-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--secret); color: white; border: 2px solid #8B5CF6; padding: 12px 24px; font-family: var(--font-ui); font-size: 0.75rem; box-shadow: 0 0 20px rgba(139,92,246,0.4); transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); z-index: 500; text-align: center; letter-spacing: 0.05em; }
+.unlock-toast.show { transform: translateX(-50%) translateY(0); }
+
+.rank-toast { position: fixed; top: 80px; right: -300px; background: var(--ink); border: 3px solid var(--yellow); border-right: none; padding: 14px 20px; font-family: var(--font-ui); transition: right 0.5s cubic-bezier(0.34,1.56,0.64,1); z-index: 500; max-width: 260px; }
+.rank-toast.show { right: 0; }
+.rank-toast-title { font-size: 0.5rem; color: var(--yellow); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 4px; }
+.rank-toast-name { font-family: var(--font-display); font-size: 1.3rem; color: var(--bg); }
+.rank-toast-badge { font-size: 2rem; margin-bottom: 6px; display: block; }
+
+/* ─── FLOATING DECOR ─── */
+.sticker { position: fixed; font-size: 1.8rem; pointer-events: none; animation: float 7s ease-in-out infinite; opacity: 0.15; z-index: 0; }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-12px) rotate(4deg); } }
+
+/* ─── AGENT NAME TAG ─── */
+.agent-tag {
+  background: var(--yellow);
+  color: var(--ink);
+  padding: 2px 8px;
+  font-family: var(--font-ui);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--ink);
+  display: none;
+  text-transform: uppercase;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.agent-tag.show { display: block; }
+
+/* retro scanlines overlay */
+[data-theme="retro"] body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px);
+  pointer-events: none; z-index: 998;
+}
+</style>
+</head>
+<body data-theme="bureau">
+
+<!-- Floating decor (game only) -->
+<div class="sticker" id="stk1" style="top:14%;left:3%;animation-delay:0s;display:none">📎</div>
+<div class="sticker" id="stk2" style="top:52%;left:1.5%;animation-delay:1.8s;display:none">🔍</div>
+<div class="sticker" id="stk3" style="top:22%;right:2.5%;animation-delay:0.9s;display:none">📋</div>
+<div class="sticker" id="stk4" style="top:68%;right:4%;animation-delay:2.4s;display:none">🖊️</div>
+
+<!-- ═══════════════════════════════════════════
+     MAIN MENU PAGE
+     ═══════════════════════════════════════════ -->
+<div id="page-menu" class="active">
+
+  <!-- Hazard tape top -->
+  <div class="menu-tape"></div>
+
+  <!-- Background floating stamps -->
+  <div class="menu-stamp" style="top:5%;left:-2%;--rot:-12deg;animation-duration:8s">BUREAU</div>
+  <div class="menu-stamp" style="bottom:5%;right:-2%;--rot:10deg;animation-duration:10s;animation-delay:-3s">LOGIC</div>
+  <div class="menu-stamp" style="top:40%;left:60%;--rot:5deg;animation-duration:9s;animation-delay:-5s;font-size:3rem">CLASSIFIED</div>
+
+  <!-- Logo -->
+  <div class="menu-logo-wrap">
+    <span class="menu-seal">🏛</span>
+    <div class="menu-title">
+      The Bureau of
+      <span class="title-line2">Absurd Logic</span>
+    </div>
+    <div class="menu-subtitle">Department of Inexplicable Conclusions — Est. Unknown</div>
+  </div>
+
+  <!-- Intake form card -->
+  <div class="menu-card">
+
+    <!-- Agent name -->
+    <div class="form-row">
+      <label>Agent Designation (optional)</label>
+      <input class="agent-input" id="agent-name-input" type="text" maxlength="22" placeholder="e.g. Agent Noop" autocomplete="off" />
+    </div>
+
+    <!-- Difficulty -->
+    <div class="form-row">
+      <label>Clearance Level (Difficulty)</label>
+      <div class="diff-grid">
+        <button class="diff-btn selected" data-diff="easy" onclick="selectDiff(this)">
+          <span class="diff-icon">🟢</span>
+          Trainee
+          <span class="diff-time">30 sec/case</span>
+        </button>
+        <button class="diff-btn" data-diff="normal" onclick="selectDiff(this)">
+          <span class="diff-icon">🟡</span>
+          Officer
+          <span class="diff-time">20 sec/case</span>
+        </button>
+        <button class="diff-btn" data-diff="hard" onclick="selectDiff(this)">
+          <span class="diff-icon">🔴</span>
+          Director
+          <span class="diff-time">12 sec/case</span>
+        </button>
+      </div>
+    </div>
+
+    <hr class="menu-divider">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <span style="font-family:var(--font-ui);font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;opacity:0.5">Appearance &amp; Options</span>
+      <button class="settings-link" onclick="openSettings()">⚙ Open Settings</button>
+    </div>
+
+    <!-- Mini theme preview pills -->
+    <div id="mini-theme-row" style="display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap"></div>
+
+    <button class="start-btn" onclick="startGame()">
+      📂 Begin Case Assignment
+    </button>
+  </div>
+
+  <!-- How-to chips -->
+  <div class="how-to-strip">
+    <div class="how-chip"><span>⏱</span> Timed cases</div>
+    <div class="how-chip"><span>🔥</span> Streak combos</div>
+    <div class="how-chip"><span>💡</span> Lifelines</div>
+    <div class="how-chip"><span>🏅</span> Rank system</div>
+    <div class="how-chip"><span>🔮</span> Secret cases</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SETTINGS OVERLAY
+     ═══════════════════════════════════════════ -->
+<div id="settings-overlay">
+  <div class="settings-panel">
+    <div class="settings-header">
+      <div>
+        <h2>⚙ Bureau Settings</h2>
+        <span class="sh-sub">Regulation 44-B: Agent Customisation Form</span>
+      </div>
+      <button class="close-btn" onclick="closeSettings()">✕</button>
+    </div>
+    <div class="settings-body">
+
+      <!-- THEMES -->
+      <div class="settings-section">
+        <div class="settings-section-title">Visual Theme</div>
+        <div class="theme-grid" id="theme-grid"></div>
+      </div>
+
+      <!-- GAMEPLAY -->
+      <div class="settings-section">
+        <div class="settings-section-title">Gameplay Options</div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="tl">Timer</span>
+            <span class="ts">Countdown per question</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="opt-timer" checked>
+            <div class="toggle-track"></div>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="tl">Combo Multipliers</span>
+            <span class="ts">Streak bonus ×2, ×3</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="opt-combo" checked>
+            <div class="toggle-track"></div>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="tl">Animated Effects</span>
+            <span class="ts">Score popups, burst particles</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="opt-fx" checked>
+            <div class="toggle-track"></div>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="tl">Shuffle Questions</span>
+            <span class="ts">Random order each run</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="opt-shuffle" checked>
+            <div class="toggle-track"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- LIFELINES -->
+      <div class="settings-section">
+        <div class="settings-section-title">Lifeline Stock</div>
+        <div class="slider-row">
+          <div class="slider-label">Hints <span id="hint-val">2</span></div>
+          <input type="range" id="sl-hints" min="0" max="5" value="2" oninput="document.getElementById('hint-val').textContent=this.value">
+        </div>
+        <div class="slider-row">
+          <div class="slider-label">50/50 Uses <span id="fifty-val">2</span></div>
+          <input type="range" id="sl-fifty" min="0" max="5" value="2" oninput="document.getElementById('fifty-val').textContent=this.value">
+        </div>
+        <div class="slider-row">
+          <div class="slider-label">Skips <span id="skip-val">1</span></div>
+          <input type="range" id="sl-skips" min="0" max="3" value="1" oninput="document.getElementById('skip-val').textContent=this.value">
+        </div>
+      </div>
+
+      <button class="settings-save-btn" onclick="saveSettings()">✓ Save Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     GAME PAGE
+     ═══════════════════════════════════════════ -->
+<div id="page-game">
+
+  <header>
+    <div class="header-logo">
+      The Bureau of Absurd Logic
+      <span>Department of Inexplicable Conclusions</span>
+    </div>
+    <div class="hud">
+      <div class="combo-badge" id="combo-badge">🔥 ×2</div>
+      <div class="agent-tag" id="agent-tag"></div>
+      <div class="hud-item">
+        <label>Score</label>
+        <div class="val" id="score-display">0</div>
+      </div>
+      <div class="hud-item">
+        <label>Case</label>
+        <div class="val" id="case-display">1/10</div>
+      </div>
+      <button class="header-menu-btn" onclick="goToMenu()">☰ Menu</button>
+    </div>
+  </header>
+
+  <div id="rank-banner">
+    <span class="rank-badge-icon" id="rank-badge-icon">🪪</span>
+    <div>
+      <div class="rank-label">Rank</div>
+      <div class="rank-name" id="rank-name">Field Recruit</div>
+    </div>
+    <div class="xp-bar-wrap"><div class="xp-bar-fill" id="xp-bar" style="width:0%"></div></div>
+    <div class="xp-text" id="xp-text">0 XP</div>
+  </div>
+
+  <div id="stage">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+
+    <div id="puzzle-container">
+
+      <div class="puzzle-card" id="puzzle-card">
+        <div class="card-top-bar">
+          <span class="case-tag" id="case-tag">CASE FILE #001</span>
+          <span class="points-tag" id="points-tag">+100 pts</span>
+        </div>
+        <div class="timer-row">
+          <div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div>
+          <div class="timer-num" id="timer-num">20</div>
+        </div>
+        <div class="puzzle-question" id="puzzle-question">Loading...</div>
+        <div class="puzzle-flavor" id="puzzle-flavor"></div>
+        <div class="hint-box" id="hint-box"></div>
+        <div class="lifelines-row">
+          <button class="lifeline-btn" id="ll-hint" onclick="useLifeline('hint')">
+            <span class="ll-icon">💡</span> Hint <span class="ll-count" id="ll-hint-count">2</span>
+          </button>
+          <button class="lifeline-btn" id="ll-fifty" onclick="useLifeline('fifty')">
+            <span class="ll-icon">✂️</span> 50/50 <span class="ll-count" id="ll-fifty-count">2</span>
+          </button>
+          <button class="lifeline-btn" id="ll-skip" onclick="useLifeline('skip')">
+            <span class="ll-icon">⏭️</span> Skip <span class="ll-count" id="ll-skip-count">1</span>
+          </button>
+        </div>
+        <div class="options" id="options"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="next-btn" onclick="nextPuzzle()">Next Case →</button>
+        <div class="stamp-bg" id="stamp-bg">PENDING</div>
+      </div>
+
+      <div id="secret-unlock">
+        <div style="font-size:3rem;margin-bottom:12px">🔮</div>
+        <div class="secret-unlock-title">CLASSIFIED ACCESS GRANTED</div>
+        <div class="secret-unlock-sub">Eyes Only — Department of Impossible Cases</div>
+        <div class="secret-unlock-desc">Your performance has flagged you as a person of unusual cognitive flexibility. The Bureau has unlocked 3 additional cases from the Restricted Archives. These cases are stranger. Proceed at your own risk.</div>
+        <button class="secret-enter-btn" onclick="startSecretCases()">🗂 Enter the Restricted Archives</button>
+      </div>
+
+      <div id="end-screen">
+        <div class="end-title" id="end-title">CASE<br>CLOSED</div>
+        <div class="end-subtitle">Official Bureau Final Assessment</div>
+        <div class="end-score-big" id="end-score">0</div>
+        <div style="font-size:0.65rem;color:var(--ink2);font-family:var(--font-ui);margin-bottom:12px">TOTAL POINTS</div>
+        <div class="end-rank-display" id="end-rank-display">
+          <span class="erb">🪪</span>
+          <div><span class="erl">Final Rank</span><span class="ern" id="end-rank-name">Field Recruit</span></div>
+        </div>
+        <div class="end-stats">
+          <div class="end-stat-item"><span class="esv" id="es-correct">0</span><span class="esl">Correct</span></div>
+          <div class="end-stat-item"><span class="esv" id="es-streak">0</span><span class="esl">Best Streak</span></div>
+          <div class="end-stat-item"><span class="esv" id="es-xp">0</span><span class="esl">XP Earned</span></div>
+          <div class="end-stat-item"><span class="esv" id="es-secret">—</span><span class="esl">Secret Cases</span></div>
+        </div>
+        <div class="end-badges" id="end-badges"></div>
+        <div class="end-verdict" id="end-verdict"></div>
+        <div class="end-btn-row">
+          <button class="menu-btn-end" onclick="goToMenu()">🏠 Main Menu</button>
+          <button class="restart-btn" onclick="restartGame()">🗂 Play Again</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Toasts -->
+<div class="unlock-toast" id="unlock-toast">🔮 SECRET CASES UNLOCKED</div>
+<div class="rank-toast" id="rank-toast">
+  <div class="rank-toast-title">Rank Promotion</div>
+  <span class="rank-toast-badge" id="rank-toast-badge">🪪</span>
+  <div class="rank-toast-name" id="rank-toast-name">—</div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+//  THEME SYSTEM
+// ═══════════════════════════════════════════════════
+
+const THEMES = [
+  {
+    id: 'bureau',
+    name: 'Bureau',
+    bg: '#F5F0E8', paper: '#EDE8DC', ink: '#1A1208',
+    red: '#C8321A', accent: '#2A7F72', yellow: '#F2C94C',
+  },
+  {
+    id: 'noir',
+    name: 'Noir',
+    bg: '#0f0f0f', paper: '#1a1a1a', ink: '#e8e0d0',
+    red: '#e03030', accent: '#3a9e8f', yellow: '#d4a017',
+  },
+  {
+    id: 'retro',
+    name: 'Retro',
+    bg: '#001100', paper: '#001500', ink: '#00ff41',
+    red: '#ff3300', accent: '#00cc88', yellow: '#ffcc00',
+  },
+  {
+    id: 'elegant',
+    name: 'Elegant',
+    bg: '#faf7f2', paper: '#f5f0e8', ink: '#2c1810',
+    red: '#8b1a1a', accent: '#2e5c3a', yellow: '#c8960c',
+  },
+  {
+    id: 'candy',
+    name: 'Candy',
+    bg: '#fff0f8', paper: '#ffe8f6', ink: '#1a0020',
+    red: '#e0186a', accent: '#00bfa5', yellow: '#f7c842',
+  },
+];
+
+let currentTheme = 'bureau';
+
+function buildThemeUI() {
+  const grid = document.getElementById('theme-grid');
+  const miniRow = document.getElementById('mini-theme-row');
+  grid.innerHTML = '';
+  miniRow.innerHTML = '';
+
+  THEMES.forEach(t => {
+    // Full swatch in settings
+    const sw = document.createElement('div');
+    sw.className = 'theme-swatch' + (t.id === currentTheme ? ' active' : '');
+    sw.onclick = () => applyTheme(t.id);
+    sw.innerHTML = `
+      <div class="swatch-preview" style="background:${t.bg}">
+        <div style="height:14px;background:${t.ink};width:100%"></div>
+        <div style="display:flex;gap:3px;padding:4px">
+          <div style="flex:1;height:8px;background:${t.red}"></div>
+          <div style="flex:1;height:8px;background:${t.accent}"></div>
+          <div style="flex:1;height:8px;background:${t.yellow}"></div>
+        </div>
+        <div style="padding:4px">
+          <div style="height:6px;background:${t.paper};border:1px solid ${t.ink};margin-bottom:3px"></div>
+          <div style="height:6px;background:${t.paper};border:1px solid ${t.ink};width:70%"></div>
+        </div>
+        <span class="check-mark">✓</span>
+      </div>
+      <div class="swatch-name">${t.name}</div>
+    `;
+    grid.appendChild(sw);
+
+    // Mini pill in menu
+    const pill = document.createElement('div');
+    pill.onclick = () => { applyTheme(t.id); buildThemeUI(); };
+    pill.title = t.name;
+    pill.style.cssText = `
+      width:28px;height:28px;background:${t.bg};
+      border:2px solid ${t.id===currentTheme ? t.accent : t.ink};
+      cursor:pointer;flex-shrink:0;
+      box-shadow:${t.id===currentTheme ? '3px 3px 0 '+t.ink : 'none'};
+      transition:all 0.13s;
+      position:relative;overflow:hidden;
+    `;
+    pill.innerHTML = `<div style="position:absolute;inset:0;background:linear-gradient(135deg,${t.ink} 0%,${t.ink} 40%,${t.red} 40%,${t.red} 70%,${t.accent} 70%,${t.accent} 100%)"></div>`;
+    miniRow.appendChild(pill);
+  });
+}
+
+function applyTheme(id) {
+  currentTheme = id;
+  document.body.setAttribute('data-theme', id);
+  buildThemeUI();
+}
+
+// ═══════════════════════════════════════════════════
+//  SETTINGS
+// ═══════════════════════════════════════════════════
+
+let settings = {
+  timer: true,
+  combo: true,
+  fx: true,
+  shuffle: true,
+  hints: 2,
+  fifty: 2,
+  skips: 1,
+  diff: 'easy',
+};
+
+function openSettings() {
+  document.getElementById('settings-overlay').classList.add('open');
+  // Sync UI to current settings
+  document.getElementById('opt-timer').checked = settings.timer;
+  document.getElementById('opt-combo').checked = settings.combo;
+  document.getElementById('opt-fx').checked = settings.fx;
+  document.getElementById('opt-shuffle').checked = settings.shuffle;
+  document.getElementById('sl-hints').value = settings.hints;
+  document.getElementById('sl-fifty').value = settings.fifty;
+  document.getElementById('sl-skips').value = settings.skips;
+  document.getElementById('hint-val').textContent = settings.hints;
+  document.getElementById('fifty-val').textContent = settings.fifty;
+  document.getElementById('skip-val').textContent = settings.skips;
+}
+
+function closeSettings() {
+  document.getElementById('settings-overlay').classList.remove('open');
+}
+
+function saveSettings() {
+  settings.timer   = document.getElementById('opt-timer').checked;
+  settings.combo   = document.getElementById('opt-combo').checked;
+  settings.fx      = document.getElementById('opt-fx').checked;
+  settings.shuffle = document.getElementById('opt-shuffle').checked;
+  settings.hints   = parseInt(document.getElementById('sl-hints').value);
+  settings.fifty   = parseInt(document.getElementById('sl-fifty').value);
+  settings.skips   = parseInt(document.getElementById('sl-skips').value);
+  closeSettings();
+  // Flash save confirmation
+  const btn = document.querySelector('.settings-save-btn');
+  const orig = btn.textContent;
+  btn.textContent = '✓ Saved!';
+  btn.style.background = 'var(--accent)';
+  setTimeout(() => { btn.textContent = orig; }, 1500);
+}
+
+function selectDiff(btn) {
+  document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  settings.diff = btn.dataset.diff;
+}
+
+// Close settings on backdrop click
+document.getElementById('settings-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeSettings();
+});
+
+// ═══════════════════════════════════════════════════
+//  PAGE NAVIGATION
+// ═══════════════════════════════════════════════════
+
+function showPage(id) {
+  document.getElementById('page-menu').classList.remove('active');
+  const game = document.getElementById('page-game');
+  game.style.display = id === 'game' ? 'block' : 'none';
+  if (id === 'menu') {
+    document.getElementById('page-menu').classList.add('active');
+    // Hide game stickers
+    ['stk1','stk2','stk3','stk4'].forEach(s => document.getElementById(s).style.display='none');
+  } else {
+    ['stk1','stk2','stk3','stk4'].forEach(s => document.getElementById(s).style.display='');
+  }
+}
+
+function goToMenu() {
+  stopTimer();
+  showPage('menu');
+  buildThemeUI();
+}
+
+function startGame() {
+  const agentName = document.getElementById('agent-name-input').value.trim();
+
+  // Show agent tag in HUD
+  const tag = document.getElementById('agent-tag');
+  if (agentName) {
+    tag.textContent = agentName;
+    tag.classList.add('show');
+  } else {
+    tag.classList.remove('show');
+  }
+
+  showPage('game');
+  resetAndInit();
+}
+
+// ═══════════════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════════════
+
+const RANKS = [
+  { name: "Field Recruit",        icon: "🪪", xpNeeded: 0    },
+  { name: "Junior Analyst",       icon: "📋", xpNeeded: 150  },
+  { name: "Case Officer",         icon: "🔍", xpNeeded: 350  },
+  { name: "Senior Investigator",  icon: "🗂",  xpNeeded: 600  },
+  { name: "Chief of Oddities",    icon: "🎩", xpNeeded: 900  },
+  { name: "Director of Nonsense", icon: "🏛", xpNeeded: 1300 },
+  { name: "Grand Absurdist",      icon: "🌀", xpNeeded: 1800 },
+];
+
+const BADGES = [
+  { id: 'first_blood',  icon: '🩸', label: 'First Answer',  condition: s => s.totalAnswered >= 1 },
+  { id: 'streak3',      icon: '🔥', label: 'On Fire',       condition: s => s.bestStreak >= 3 },
+  { id: 'streak5',      icon: '💥', label: 'Unstoppable',   condition: s => s.bestStreak >= 5 },
+  { id: 'no_lifelines', icon: '🧠', label: 'Unaided',       condition: s => s.lifelinesUsed === 0 && s.totalAnswered >= 5 },
+  { id: 'speed_demon',  icon: '⚡', label: 'Speed Demon',   condition: s => s.fastAnswers >= 3 },
+  { id: 'secret_done',  icon: '🔮', label: 'Eyes Only',     condition: s => s.secretCompleted > 0 },
+  { id: 'perfect',      icon: '✨', label: 'Flawless',      condition: s => s.correct === s.totalAnswered && s.totalAnswered >= 8 },
+  { id: 'survivor',     icon: '🧟', label: 'Survivor',      condition: s => s.timeouts <= 2 && s.totalAnswered >= 8 },
+];
+
+const NORMAL_PUZZLES = [
+  { q:"A man eats his shoes for breakfast every Tuesday. On Wednesday, he is neither full nor hungry. Why?", flavor:"Submitted by Field Agent Morbidly Specific. Priority: URGENT (but not really).", hint:"Consider what 'shoe-tasting' as a profession would entail metabolically.", options:["Tuesday never actually happened","He is a professional shoe-taster — shoes provide zero nutrition","Wednesday begins before Tuesday ends in his timezone","He digested the laces but not the soles"], correct:1, correctFeedback:"✅ CORRECT! Regulation shoe-tasters are trained to consume footwear for analysis without triggering hunger responses. It's a whole certification.", wrongFeedback:"❌ INCORRECT. Review Appendix 7B: Inedible Professions and Their Metabolic Consequences." },
+  { q:"Every clock in the Museum of Lost Time shows a different hour. Which one is correct?", flavor:"No staff have entered the museum since 1987. The gift shop is still open.", hint:"Think about which type of clock achieves maximum correctness per day.", options:["The one that is broken — it's right twice a day","The one labeled 'DO NOT LOOK AT'","All of them, simultaneously, in parallel dimensions","None — the museum exists outside of time (gift shop excepted)"], correct:0, correctFeedback:"✅ CORRECT! A stopped clock's accuracy is 200% superior to a slightly-wrong clock over 24 hours. Bureau's foundational theorem.", wrongFeedback:"❌ INCORRECT. A clock that is slightly wrong is wrong ALL the time. A broken clock is right twice. Do the math." },
+  { q:"You find a door in the middle of the ocean. It opens inward. What is behind it?", flavor:"Discovered during Expedition #44. Three agents entered. Four came back.", hint:"All Bureau doors in inexplicable locations lead to the same place.", options:["More ocean, but louder","A waiting room with no chairs","The opposite of a door: a window","Whatever you were least expecting — so, a door"], correct:1, correctFeedback:"✅ CORRECT! All doors in inexplicable locations open into waiting rooms. Bureau Directive 9. The lack of chairs is standard.", wrongFeedback:"❌ INCORRECT. 'More ocean' fails to account for the inward direction. An inward ocean would be extremely problematic." },
+  { q:"A library contains every book except the one you need. Where is that book?", flavor:"Librarian's note: 'We have it. We simply choose not to.' — Ms. Helga V.", hint:"Consider a borrower from 1943.", options:["In the library — you simply haven't looked hard enough","It doesn't exist yet. You must write it.","It is the library building itself","It was checked out in 1943 and never returned"], correct:3, correctFeedback:"✅ CORRECT! Bureau records confirm: 94.7% of missing books were last borrowed in 1943. The borrower's name is always R. Finch.", wrongFeedback:"❌ INCORRECT. 'You must write it' creates a paradox loop and clogs the card catalogue." },
+  { q:"A train leaves Station A at 9am at 60mph. A sandwich leaves Station B at noon. What arrives first?", flavor:"Mathematical note: both stations are fictional. The sandwich is tuna.", hint:"Where was the sandwich before it 'left'?", options:["The train — it left 3 hours earlier","The sandwich — it was already there","Neither — they cancel each other out","The question — it arrived before both of them"], correct:1, correctFeedback:"✅ CORRECT! A sandwich 'leaving' Station B implies it was there. It was already at the destination, having never truly departed.", wrongFeedback:"❌ INCORRECT. You fell for the train. The Bureau has a poster: 'Don't fall for the train.'" },
+  { q:"You are given a box that is smaller on the outside AND smaller on the inside. What is it?", flavor:"Package arrived at Bureau HQ. No return address. Contents: another question.", hint:"An object with no interior or exterior volume is, geometrically, what?", options:["A paradox box — destroy immediately","A box that does not exist, paperwork notwithstanding","A point in space with delusions of grandeur","A very ambitious box"], correct:2, correctFeedback:"✅ CORRECT! An object with no volume is geometrically a point. Its claim to boxhood is noted but unverified.", wrongFeedback:"❌ INCORRECT. 'Very ambitious box' has emotional appeal but the Bureau operates on geometry, not aspiration." },
+  { q:"A ghost haunts a house but is afraid of the dark. What does it do at night?", flavor:"Homeowner note: 'It leaves a small nightlight on. It apologized via Ouija board.'", hint:"The nightlight is confirmed to exist. What kind is it?", options:["Haunts during the day — ghosts have flexible schedules","Leaves a nightlight on and haunts nervously","Becomes a different, braver ghost after 10pm","Ceases to exist — darkness negates spectral presence"], correct:1, correctFeedback:"✅ CORRECT! Filed under 'Haunted Properties with Reasonable Accommodations.' The nightlight is 4-watt, mushroom-shaped.", wrongFeedback:"❌ INCORRECT. Ghosts in darkness become invisible AND scared, which makes them more erratic, not less." },
+  { q:"An echo speaks before you do. What did it say?", flavor:"Acoustic anomaly filed by Department of Premature Sounds. Case status: spooky.", hint:"Consider the definition of an echo very carefully.", options:["Whatever you were about to say — it's heard the future","Nothing. An echo that precedes you is just a voice.","It said: 'I knew you were going to say that'","The word you most regret from last Thursday"], correct:1, correctFeedback:"✅ CORRECT! An echo that speaks first is not an echo — it is a voice with strong opinions about sound sequencing.", wrongFeedback:"❌ INCORRECT. The Bureau must prioritize definitional accuracy over ambiance." },
+  { q:"You inherit a map that leads to itself. What have you inherited?", flavor:"Estate of Gerald H. Noop. Assets: one map, one lamp (unrelated), mild confusion.", hint:"A map that leads to itself occupies the same space it describes.", options:["A philosophical burden","A map of the map — very detailed, very useless","Ownership of the concept of maps","The place the map is located — which contains the map"], correct:3, correctFeedback:"✅ CORRECT! You inherit the space — plus the map, plus whatever Gerald left in the lamp.", wrongFeedback:"❌ INCORRECT. 'Philosophical burden' is the most submitted answer. It is also never correct." },
+  { q:"The last rule of the Bureau is that there are no rules. Is the last rule a rule?", flavor:"Final standard exam. Your file will be kept in a cabinet no one can find.", hint:"Consider Schrödinger's approach to self-referential regulations.", options:["Yes — it states something definitively","No — it cancels itself upon being stated","It is simultaneously a rule and not a rule until observed","The question is the rule, and the rule is the answer"], correct:2, correctFeedback:"✅ CORRECT! A Schrödinger Regulation: existing in superposition until an agent reads it, at which point it becomes whatever is inconvenient.", wrongFeedback:"❌ INCORRECT. Per the last rule, there are no wrong answers. Except that one." },
+];
+
+const SECRET_PUZZLES = [
+  { q:"You meet yourself walking toward you. You are both moving at the same speed. When do you meet?", flavor:"🔮 RESTRICTED FILE: Submitted from a location that doesn't have a postal code.", hint:"Consider: if you are both the same entity, meeting is already complete.", options:["You already met — the meeting IS the walking","You never meet — two of you cannot share a space","Immediately, because you are already at the same location","At the exact midpoint of a place that doesn't exist yet"], correct:0, correctFeedback:"✅ CORRECT! Two identical entities converging is simply one entity experiencing itself from both ends simultaneously. Bureau Theorem 0.", wrongFeedback:"❌ INCORRECT. 'Meeting yourself' is not a future event. It is a present state not yet acknowledged." },
+  { q:"A sentence describes itself perfectly. How many sentences are there?", flavor:"🔮 RESTRICTED FILE: Found written on a mirror, in the mirror's handwriting.", hint:"A perfect self-description creates a closed loop. Loops have no beginning or end.", options:["One sentence, eternally","Two — the sentence and its description","Zero — a sentence cannot be both subject and object","Infinite — each description requires another description"], correct:0, correctFeedback:"✅ CORRECT! A perfectly self-describing sentence is a loop with exactly one member. Like a snake eating its own tail, but with better grammar.", wrongFeedback:"❌ INCORRECT. The Bureau's linguistics division spent 11 years on this. The answer is one. They are not happy about it." },
+  { q:"The colour of silence in a room that has never been entered — what is it?", flavor:"🔮 RESTRICTED FILE: Paint sample requested. Sample arrived empty. Sample was approved.", hint:"An unobserved thing has no definite properties. What does that make its colour?", options:["White — the absence of colour","Undefined — observation collapses it","The last colour seen before the room was sealed","All colours, therefore no colour — which is also white"], correct:1, correctFeedback:"✅ CORRECT! An unobserved room has no definite colour. The Bureau has this room on the 4th floor. We do not open it.", wrongFeedback:"❌ INCORRECT. You assumed the room has properties before observation. Review Schrödinger's paint catalogue." },
+];
+
+// ═══════════════════════════════════════════════════
+//  GAME STATE
+// ═══════════════════════════════════════════════════
+
+let state = {};
+let currentRankIdx = 0;
+const stamps = ["PENDING","UNDER REVIEW","FLAGGED","CURIOUS","UNUSUAL","INCONCLUSIVE","NOTED","BIZARRE","ARCHIVED","RESOLVED","CLASSIFIED","EYES ONLY","REDACTED"];
+
+function getTimerDuration(phase) {
+  if (!settings.timer) return 9999;
+  if (phase === 'secret') return 25;
+  return { easy: 30, normal: 20, hard: 12 }[settings.diff] || 20;
+}
+
+function resetAndInit() {
+  stopTimer();
+  currentRankIdx = 0;
+  state = {
+    phase: 'normal',
+    puzzleIndex: 0,
+    puzzles: settings.shuffle ? [...NORMAL_PUZZLES].sort(() => Math.random()-0.5) : [...NORMAL_PUZZLES],
+    score: 0, xp: 0, streak: 0, bestStreak: 0, combo: 1,
+    correct: 0, totalAnswered: 0, timeouts: 0, fastAnswers: 0,
+    lifelinesUsed: 0, secretCompleted: 0,
+    lifelines: { hint: settings.hints, fifty: settings.fifty, skip: settings.skips },
+    answered: false, timerInterval: null, earnedBadges: [], secretUnlocked: false,
+  };
+
+  document.getElementById('score-display').textContent = '0';
+  document.getElementById('end-screen').classList.remove('show');
+  document.getElementById('secret-unlock').classList.remove('show');
+  document.getElementById('puzzle-card').style.display = '';
+  updateComboUI();
+  updateRankUI();
+  loadPuzzle();
+}
+
+// ═══════════════════════════════════════════════════
+//  PUZZLE
+// ═══════════════════════════════════════════════════
+
+function loadPuzzle() {
+  const p = state.puzzles[state.puzzleIndex];
+  state.answered = false;
+  const isSecret = state.phase === 'secret';
+
+  const card = document.getElementById('puzzle-card');
+  card.className = 'puzzle-card' + (isSecret ? ' secret-mode' : '');
+  card.style.animation = 'none'; card.offsetHeight; card.style.animation = '';
+
+  const caseNum = String(state.puzzleIndex+1).padStart(3,'0');
+  document.getElementById('case-tag').textContent = isSecret ? `🔮 RESTRICTED FILE #${caseNum}` : `CASE FILE #${caseNum}`;
+  document.getElementById('case-tag').className = 'case-tag' + (isSecret ? ' secret' : '');
+  document.getElementById('points-tag').textContent = `+${isSecret?250:100} pts (×${state.combo})`;
+  document.getElementById('puzzle-question').textContent = p.q;
+  document.getElementById('puzzle-flavor').textContent = p.flavor;
+  document.getElementById('case-display').textContent = `${state.puzzleIndex+1}/${state.puzzles.length}`;
+  document.getElementById('stamp-bg').textContent = stamps[state.puzzleIndex % stamps.length];
+  document.getElementById('progress-bar').style.width = `${(state.puzzleIndex/state.puzzles.length)*100}%`;
+
+  document.getElementById('hint-box').className = 'hint-box';
+  document.getElementById('hint-box').textContent = '';
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').innerHTML = '';
+  document.getElementById('next-btn').className = 'next-btn' + (isSecret ? ' secret' : '');
+
+  const letters = ['A','B','C','D'];
+  const optEl = document.getElementById('options');
+  optEl.innerHTML = '';
+  p.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.dataset.idx = i;
+    btn.innerHTML = `<span class="option-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i);
+    optEl.appendChild(btn);
+  });
+
+  updateLifelineUI();
+  startTimer(getTimerDuration(state.phase));
+}
+
+// ═══════════════════════════════════════════════════
+//  TIMER
+// ═══════════════════════════════════════════════════
+
+function startTimer(seconds) {
+  clearInterval(state.timerInterval);
+  state.timeLeft = seconds; state.timeMax = seconds;
+  updateTimerUI();
+  if (!settings.timer) {
+    document.getElementById('timer-fill').style.width = '100%';
+    document.getElementById('timer-num').textContent = '∞';
+    return;
+  }
+  state.timerInterval = setInterval(() => {
+    state.timeLeft -= 0.1;
+    if (state.timeLeft <= 0) { state.timeLeft = 0; updateTimerUI(); clearInterval(state.timerInterval); onTimeout(); }
+    else updateTimerUI();
+  }, 100);
+}
+
+function stopTimer() { clearInterval(state.timerInterval); }
+
+function updateTimerUI() {
+  const pct = (state.timeLeft / state.timeMax) * 100;
+  const fill = document.getElementById('timer-fill');
+  const num = document.getElementById('timer-num');
+  fill.style.width = pct + '%';
+  fill.className = 'timer-fill' + (pct<=20?' danger':pct<=45?' warning':'');
+  num.textContent = Math.ceil(state.timeLeft);
+  num.className = 'timer-num' + (pct<=20?' danger':'');
+}
+
+function onTimeout() {
+  if (state.answered) return;
+  state.answered = true; state.totalAnswered++; state.timeouts++;
+  state.streak = 0; state.combo = 1; updateComboUI();
+  const p = state.puzzles[state.puzzleIndex];
+  document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+  document.querySelectorAll('.option-btn')[p.correct].classList.add('correct');
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback show timeout-fb';
+  fb.innerHTML = `<span class="feedback-emoji">⏰</span><strong>TIME'S UP!</strong> The correct answer was <strong>${['A','B','C','D'][p.correct]}</strong>. ${p.wrongFeedback.replace('❌ INCORRECT. ','')}`;
+  document.getElementById('next-btn').className = 'next-btn' + (state.phase==='secret'?' secret':'') + ' show';
+  checkBadges();
+}
+
+// ═══════════════════════════════════════════════════
+//  ANSWER
+// ═══════════════════════════════════════════════════
+
+function selectAnswer(idx) {
+  if (state.answered) return;
+  state.answered = true; stopTimer();
+  const p = state.puzzles[state.puzzleIndex];
+  const isCorrect = idx === p.correct;
+  const isSecret = state.phase === 'secret';
+  const timeBonus = Math.floor((state.timeLeft / state.timeMax) * 50);
+  const basePoints = isSecret ? 250 : 100;
+
+  document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+  document.querySelectorAll('.option-btn')[idx].classList.add(isCorrect ? 'correct' : 'wrong');
+  document.querySelectorAll('.option-btn')[p.correct].classList.add('correct');
+  state.totalAnswered++;
+
+  if (isCorrect) {
+    state.correct++; state.streak++; state.bestStreak = Math.max(state.bestStreak, state.streak);
+    if (state.timeLeft > state.timeMax * 0.7) state.fastAnswers++;
+
+    if (settings.combo) {
+      state.combo = state.streak >= 5 ? 3 : state.streak >= 3 ? 2 : 1;
+    }
+
+    const pts = Math.floor((basePoints + timeBonus) * state.combo);
+    state.score += pts; state.xp += pts;
+    document.getElementById('score-display').textContent = state.score;
+    updateRankUI(); updateComboUI();
+
+    if (settings.fx) { spawnScorePopup(`+${pts}`, isSecret ? '#c4b5fd' : 'var(--accent)'); spawnBurst(); }
+    if (isSecret) state.secretCompleted++;
+
+    const fb = document.getElementById('feedback');
+    fb.className = 'feedback show correct-fb';
+    fb.innerHTML = `<span class="feedback-emoji">🏅</span>${p.correctFeedback}<br><small style="color:var(--accent);font-family:var(--font-ui)">+${pts} pts${timeBonus>20?' ⚡ speed bonus!':''}${state.combo>1?' 🔥 ×'+state.combo+' combo!':''}</small>`;
+  } else {
+    state.streak = 0; state.combo = 1; updateComboUI();
+    document.getElementById('feedback').className = 'feedback show wrong-fb';
+    document.getElementById('feedback').innerHTML = `<span class="feedback-emoji">📁</span>${p.wrongFeedback}`;
+  }
+
+  document.getElementById('stamp-bg').textContent = isCorrect ? 'SOLVED' : 'REJECTED';
+  document.getElementById('next-btn').className = 'next-btn' + (isSecret ? ' secret' : '') + ' show';
+  checkBadges();
+}
+
+// ═══════════════════════════════════════════════════
+//  LIFELINES
+// ═══════════════════════════════════════════════════
+
+function useLifeline(type) {
+  if (state.answered || state.lifelines[type] <= 0) return;
+  state.lifelines[type]--; state.lifelinesUsed++; updateLifelineUI();
+  const p = state.puzzles[state.puzzleIndex];
+
+  if (type === 'hint') {
+    const hb = document.getElementById('hint-box');
+    hb.className = 'hint-box show';
+    hb.innerHTML = `🔎 <strong>Bureau Hint:</strong> ${p.hint}`;
+  } else if (type === 'fifty') {
+    const wrongIdx = p.options.map((_,i)=>i).filter(i=>i!==p.correct).sort(()=>Math.random()-0.5).slice(0,2);
+    const btns = document.querySelectorAll('.option-btn');
+    wrongIdx.forEach(i => { btns[i].classList.add('eliminated'); btns[i].disabled = true; });
+  } else if (type === 'skip') {
+    stopTimer(); state.answered = true; state.streak = 0; state.combo = 1; updateComboUI();
+    const fb = document.getElementById('feedback');
+    fb.className = 'feedback show'; fb.style.borderColor = '#aaa';
+    fb.innerHTML = `<span class="feedback-emoji">⏭️</span><strong>Case skipped.</strong> The Bureau is neutral. Like Switzerland, but more absurd.`;
+    document.getElementById('next-btn').className = 'next-btn' + (state.phase==='secret'?' secret':'') + ' show';
+    document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+  }
+}
+
+function updateLifelineUI() {
+  ['hint','fifty','skip'].forEach(type => {
+    const count = state.lifelines[type];
+    const countEl = document.getElementById(`ll-${type}-count`);
+    countEl.textContent = count;
+    countEl.className = 'll-count' + (count===0?' zero':'');
+    document.getElementById(`ll-${type}`).disabled = count===0 || state.answered;
+  });
+}
+
+// ═══════════════════════════════════════════════════
+//  COMBO + RANK UI
+// ═══════════════════════════════════════════════════
+
+function updateComboUI() {
+  const badge = document.getElementById('combo-badge');
+  if (!settings.combo || state.combo < 2) { badge.className = 'combo-badge'; return; }
+  badge.className = 'combo-badge show ' + (state.combo >= 3 ? 'fire' : 'hot');
+  badge.textContent = `🔥 ×${state.combo}${state.combo>=3?' COMBO':''}`;
+}
+
+function updateRankUI() {
+  let rankIdx = 0;
+  for (let i = RANKS.length-1; i >= 0; i--) { if (state.xp >= RANKS[i].xpNeeded) { rankIdx = i; break; } }
+  if (rankIdx > currentRankIdx) { currentRankIdx = rankIdx; showRankToast(RANKS[rankIdx]); }
+  const rank = RANKS[rankIdx], next = RANKS[rankIdx+1];
+  const pct = next ? Math.min(100, ((state.xp-rank.xpNeeded)/(next.xpNeeded-rank.xpNeeded))*100) : 100;
+  document.getElementById('rank-badge-icon').textContent = rank.icon;
+  document.getElementById('rank-name').textContent = rank.name;
+  document.getElementById('xp-bar').style.width = pct + '%';
+  document.getElementById('xp-text').textContent = next ? `${state.xp} / ${next.xpNeeded} XP` : `${state.xp} XP — MAX`;
+}
+
+function showRankToast(rank) {
+  const t = document.getElementById('rank-toast');
+  document.getElementById('rank-toast-badge').textContent = rank.icon;
+  document.getElementById('rank-toast-name').textContent = rank.name;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+function checkBadges() {
+  BADGES.forEach(b => { if (!state.earnedBadges.includes(b.id) && b.condition(state)) state.earnedBadges.push(b.id); });
+}
+
+// ═══════════════════════════════════════════════════
+//  FLOW
+// ═══════════════════════════════════════════════════
+
+function nextPuzzle() {
+  state.puzzleIndex++;
+  if (state.phase === 'normal' && state.puzzleIndex >= state.puzzles.length) {
+    if (!state.secretUnlocked && state.correct >= 6) { state.secretUnlocked = true; showSecretUnlock(); }
+    else showEnd();
+    return;
+  }
+  if (state.phase === 'secret' && state.puzzleIndex >= state.puzzles.length) { showEnd(); return; }
+  loadPuzzle();
+}
+
+function showSecretUnlock() {
+  document.getElementById('puzzle-card').style.display = 'none';
+  document.getElementById('secret-unlock').classList.add('show');
+  const toast = document.getElementById('unlock-toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function startSecretCases() {
+  document.getElementById('secret-unlock').classList.remove('show');
+  document.getElementById('puzzle-card').style.display = '';
+  state.phase = 'secret';
+  state.puzzles = [...SECRET_PUZZLES];
+  state.puzzleIndex = 0;
+  loadPuzzle();
+}
+
+function showEnd() {
+  stopTimer();
+  document.getElementById('puzzle-card').style.display = 'none';
+  document.getElementById('secret-unlock').classList.remove('show');
+  document.getElementById('progress-bar').style.width = '100%';
+  checkBadges();
+
+  const end = document.getElementById('end-screen');
+  end.classList.add('show');
+  document.getElementById('end-score').textContent = state.score.toLocaleString();
+  document.getElementById('es-correct').textContent = `${state.correct}/${state.totalAnswered}`;
+  document.getElementById('es-streak').textContent = state.bestStreak;
+  document.getElementById('es-xp').textContent = state.xp;
+  document.getElementById('es-secret').textContent = state.secretCompleted > 0 ? `${state.secretCompleted}/3` : '🔒';
+
+  let rankIdx = 0;
+  for (let i = RANKS.length-1; i >= 0; i--) { if (state.xp >= RANKS[i].xpNeeded) { rankIdx = i; break; } }
+  const rank = RANKS[rankIdx];
+  document.getElementById('end-rank-display').querySelector('.erb').textContent = rank.icon;
+  document.getElementById('end-rank-name').textContent = rank.name;
+
+  const bc = document.getElementById('end-badges');
+  bc.innerHTML = state.earnedBadges.length === 0
+    ? '<div style="color:var(--ink2);font-size:0.7rem;font-family:var(--font-ui)">No badges earned. The Bureau notes this without comment.</div>'
+    : state.earnedBadges.map(id => { const b = BADGES.find(x=>x.id===id); return b?`<div class="badge-pill${id==='secret_done'?' secret-badge':''}">${b.icon} ${b.label}</div>`:''; }).join('');
+
+  const verdicts = [
+    [0,2,"The Bureau has reviewed your file. We recommend re-enrollment in Basic Logic (Absurd Track)."],
+    [3,5,"A respectable showing of confused competence. You can be wrong in new and interesting ways."],
+    [6,8,"The Bureau is mildly impressed. You have a dangerous fluency in the irrational."],
+    [9,11,"Outstanding. Report to Agent Noop's office. He has a lamp and several urgent questions."],
+    [12,99,"PERFECT OR NEAR-PERFECT. The Bureau is simultaneously proud and suspicious. An investigation is open."],
+  ];
+  const v = verdicts.find(([lo,hi]) => state.correct>=lo && state.correct<=hi);
+  document.getElementById('end-verdict').textContent = v ? v[2] : '';
+
+  const titles = ["CASE COLD","CASE CLOSED","CASE NOTABLE","CASE SOLVED","CASE LEGENDARY"];
+  const ti = Math.min(4, Math.floor((state.correct/Math.max(1,state.totalAnswered))*5));
+  document.getElementById('end-title').innerHTML = titles[ti].replace(' ','<br>');
+}
+
+function restartGame() {
+  document.getElementById('end-screen').classList.remove('show');
+  document.getElementById('puzzle-card').style.display = '';
+  resetAndInit();
+}
+
+// ═══════════════════════════════════════════════════
+//  FX
+// ═══════════════════════════════════════════════════
+
+function spawnScorePopup(text, color) {
+  const el = document.createElement('div');
+  el.className = 'score-popup';
+  el.textContent = text;
+  el.style.color = color;
+  el.style.left = (30+Math.random()*40)+'%';
+  el.style.top = (20+Math.random()*30)+'%';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1200);
+}
+
+function spawnBurst() {
+  const emojis = ['✨','⭐','🌟','💫','🎉','📋','🔍','💡'];
+  for (let i = 0; i < 6; i++) {
+    const el = document.createElement('div');
+    el.className = 'burst';
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.left = (10+Math.random()*80)+'%';
+    el.style.top = (10+Math.random()*50)+'%';
+    el.style.animationDelay = (i*0.08)+'s';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1000);
+  }
+}
+
+// ═══════════════════════════════════════════════════
+//  BOOT
+// ═══════════════════════════════════════════════════
+
+document.getElementById('page-game').style.display = 'none';
+buildThemeUI();
+</script>
+</body>
+</html>
